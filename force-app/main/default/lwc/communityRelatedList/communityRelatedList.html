@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title={cardTitle} icon-name={cardIcon}>
+        <p class="slds-p-horizontal_small">
+            <lightning-datatable
+                key-field="Id"
+                data={relatedRecords}
+                columns={getColumns}
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+                onsort={onHandleSort}
+                hide-checkbox-column
+                resize-column-disabled
+                hide-default-actions="true"
+            ></lightning-datatable>
+        </p>
+    </lightning-card>
+</template>
