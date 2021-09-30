@@ -51,4 +51,26 @@ login and navigate to [`/packaging/installPackage.apexp?p0=04t5e000000aORGAA2`](
 - Move the columns to custom metadata so we can have more configurations in place (how to display the field -- link, phone, email, etc...)
 - Ability to filter on the related records
 
+# Development
+
+Pre-requisites:
+
+1. Run `npm install`
+
+To work on this project in a scratch org:
+
+1. [Set up CumulusCI](https://cumulusci.readthedocs.io/en/latest/tutorial.html)
+2. Run `cci service connect devhub --project` to connect to a devhub for this project.
+3. Run `cci flow run dev_org --org dev` to create the dev scratch org and deploy this project.
+4. Run `cci org browser dev` to open the org in your browser.
+5. Run `cci flow run release_unlocked_beta --org dev` to upload a new beta version of the unlocked package.
+   1. Create a new GitHub release tag for the new beta version.
+   2. Generates release notes.
+   3. Syncs feature branches with main branch.
+6. Run `cci flow run ci_beta --org beta` to create a new scratch org and run test classes.
+7. Run `cci flow run release_unlocked_production --org packaging` to promote a production release of your managed package.
+   1. It promotes the most recent beta version (found in the project’s GitHub releases) to production status.
+   2. Then, CumulusCI creates a new, production GitHub release, and aggregates release notes for that release.
+8. Run `cci flow run ci_release --org release` to install the latest production release and run all test classes in a release scratch org.
+
 ** Powered by ** [Callaway Cloud Consulting](https://www.callawaycloud.com/)
